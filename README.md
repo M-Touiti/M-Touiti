@@ -175,7 +175,7 @@ Client
 | financial-etl-pipeline | Real-time market data ETL with OHLCV aggregation | aiokafka, Pandas, PostgreSQL |
 | credit-scoring-api | ML credit scoring API with model versioning and audit logging | scikit-learn, MLflow, FastAPI |
 | payment-service | Payment microservice with Stripe + Redis idempotency layer | FastAPI, Stripe, Redis |
-| fastapi-finance-api | Personal finance manager REST API — async, JWT, Alembic | FastAPI, SQLAlchemy 2.0, JWT |
+| [fastapi-finance-api](https://github.com/M-Touiti/fastapi-finance-api) | Personal finance manager REST API — async, JWT, Alembic | FastAPI, SQLAlchemy 2.0, JWT |
 | price-monitor | E-commerce price monitor with multi-spider scraping and alerts | Scrapy, Celery, Redis |
 
 ---
@@ -219,7 +219,7 @@ microservices, data pipelines, and API development.
 | **Upwork** | 55–80 $/h | [View profile](https://www.upwork.com/freelancers/YOUR_UPWORK_ID) |
 | **Malt** | 500–550 €/day | [View profile](https://www.malt.fr/profile/YOUR_MALT_ID) |
 
-**Response time**: within 24 hours · **Timezone**: CET (Paris)
+**Response time**: within 24 hours · **Timezone**: CET (Stockholm)
 
 ---
 
