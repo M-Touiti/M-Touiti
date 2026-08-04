@@ -5,7 +5,7 @@
 
 <p align="center">
   Senior Backend Engineer · Java / Spring Boot · Python / FastAPI<br/>
-  8+ years · Fintech · Microservices · Event-Driven Architecture<br/>
+  9+ years · Fintech · Microservices · Event-Driven Architecture<br/>
   Based in Paris · Open to international freelance contracts
 </p>
 
@@ -171,8 +171,8 @@ Client
 ### Python / FastAPI
 
 | Project | Description | Stack |
-|--|---|---|
-| financial-etl-pipeline | Real-time market data ETL with OHLCV aggregation | aiokafka, Pandas, PostgreSQL |
+|---|---|---|
+| [financial-etl-pipeline](https://github.com/M-Touiti/financial-etl-pipeline) | Real-time market data ETL with OHLCV aggregation | aiokafka, Pandas, PostgreSQL |
 | [credit-scoring-api](https://github.com/M-Touiti/credit-scoring-api) | ML credit scoring API with model versioning and audit logging | scikit-learn, MLflow, FastAPI |
 | payment-service | Payment microservice with Stripe + Redis idempotency layer | FastAPI, Stripe, Redis |
 | [fastapi-finance-api](https://github.com/M-Touiti/fastapi-finance-api) | Personal finance manager REST API — async, JWT, Alembic | FastAPI, SQLAlchemy 2.0, JWT |
