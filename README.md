@@ -1,228 +1,101 @@
-<!-- Mohamed — GitHub Profile README -->
-<!-- Create repo: github.com/M-Touiti/M-Touiti, add this as README.md -->
+<!-- Profile README for github.com/M-Touiti/M-Touiti. Rewritten 1 Nov 2026.
+     Rules: every claim is backed by a repository or by the CV; no placeholders; no rates.
+     When api-gateway-resilience-demo gets its load-test report and ADRs, replace the
+     "In progress" line below with a second "Featured" entry (same shape as the first). -->
 
-<h1 align="center">Mohamed</h1>
+# Mohamed Touiti
 
-<p align="center">
-  Senior Backend Engineer · Java / Spring Boot · Python / FastAPI<br/>
-  9+ years · Fintech · Microservices · Event-Driven Architecture<br/>
-  Based in Paris · Open to international freelance contracts
-</p>
+**Senior Backend Engineer · Java, Spring Boot, Apache Kafka, Kubernetes · event-driven microservices**
 
-<p align="center">
-  <a href="https://www.upwork.com/freelancers/YOUR_UPWORK_ID">
-    <img src="https://img.shields.io/badge/Upwork-Available-14a800?logo=upwork&logoColor=white"/>
-  </a>
-  <a href="https://www.malt.fr/profile/YOUR_MALT_ID">
-    <img src="https://img.shields.io/badge/Malt-500--550€/day-FF6B35"/>
-  </a>
-  <a href="mailto:hello@mtouiti.dev">
-    <img src="https://img.shields.io/badge/Email-hello@mtouiti.dev-EA4335?logo=gmail&logoColor=white"/>
-  </a>
-  <a href="https://www.linkedin.com/in/YOUR_LINKEDIN">
-    <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?logo=linkedin&logoColor=white"/>
-  </a>
-</p>
+Paris, France (CET) · Open to a fully remote Senior Backend / Tech Lead role in any time zone, and to freelance contracts
+· [LinkedIn](https://www.linkedin.com/in/mohamed-touiti) · [hello@mtouiti.dev](mailto:hello@mtouiti.dev)
+
+9+ years building event-driven, cloud-native systems for tier-one banks. At BNP Paribas I designed and delivered the
+migration of a card-transaction monolith to Kubernetes microservices handling about 5 million Kafka events a day, in
+production since January 2026 with zero incidents. I own work end to end: target architecture, governance reviews,
+infrastructure, CI/CD, load testing and cut-over, and I write the team's engineering standards (service template,
+Git workflow, code review). Remote or hybrid since 2020, including an English-speaking project.
 
 ---
 
-## What I Build
+## Featured: a Kafka microservice that was load-tested, fixed and documented
 
-| Domain | Capabilities |
-|---|---|
-| **Event-Driven Systems** | Kafka, Dead Letter Topics, DDD, at-least-once delivery, Hexagonal Architecture |
-| **Resilient API Gateways** | Circuit breaker, rate limiting, retry, JWT validation, WebFlux, Resilience4j |
-| **Fintech / Payments** | Stripe integration, idempotency, webhooks, JWT/RBAC, PSD2-aware APIs |
-| **Data Pipelines** | Real-time ETL, OHLCV aggregation, Kafka + Pandas + PostgreSQL |
-| **ML APIs** | scikit-learn, MLflow model registry, feature engineering, FastAPI serving |
-| **SaaS Products** | Multi-tenant billing systems, multi-currency, Docker Compose deploy |
+**[spring-kafka-microservice-demo](https://github.com/M-Touiti/spring-kafka-microservice-demo)** — card-subscription
+service: Kafka consumer plus REST API, hexagonal architecture in five Maven modules (the domain module has zero
+dependencies), Spring Boot 3, PostgreSQL, Resilience4j, Testcontainers.
 
----
+What sets it apart from a typical demo:
 
-## Tech Stack
+- **Load-tested with k6, before and after.** The first run found nine defects: duplicate rows under concurrency, a
+  malformed message stalling a partition, a database connection held across the external call, failures never retried,
+  a hanging partner API blocking health checks, and more. All nine are fixed, re-measured and written up in the
+  [load-test report](https://github.com/M-Touiti/spring-kafka-microservice-demo/blob/main/performance/README.md),
+  with raw k6 output, charts and a one-command script to reproduce the suite.
+- **Architecture Decision Records.** Five one-page ADRs (context, decision, consequences) in
+  [docs/adr](https://github.com/M-Touiti/spring-kafka-microservice-demo/tree/main/docs/adr), each tied to the
+  measurements that motivated or revised it.
+- **Integration tests on real infrastructure.** Testcontainers for PostgreSQL and Kafka, WireMock for the partner
+  API, run by GitHub Actions on every push and pull request.
 
-**Backend — Java / Spring**
-
-![Java](https://img.shields.io/badge/Java-21%20%2F%2025-007396?logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x%20%2F%204.x-6DB33F?logo=springboot&logoColor=white)
-![Spring Security](https://img.shields.io/badge/Spring%20Security-6%20%2F%207-6DB33F?logo=springsecurity&logoColor=white)
-![Spring Cloud Gateway](https://img.shields.io/badge/Spring%20Cloud%20Gateway-4.x-6DB33F?logo=spring&logoColor=white)
-![Spring Kafka](https://img.shields.io/badge/Spring%20Kafka-4.x-231F20?logo=apachekafka)
-![Spring Batch](https://img.shields.io/badge/Spring%20Batch-5.x-6DB33F?logo=spring&logoColor=white)
-![Resilience4j](https://img.shields.io/badge/Resilience4j-2.x-6DB33F)
-![OpenAPI](https://img.shields.io/badge/OpenAPI-3-6BA539?logo=openapiinitiative&logoColor=white)
-
-**Backend — Python**
-
-![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)
-
-**Data & Messaging**
-
-![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-3.x-231F20?logo=apachekafka)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-7-DC382D?logo=redis&logoColor=white)
-![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0-D71F00)
-![Pandas](https://img.shields.io/badge/Pandas-2.x-150458?logo=pandas&logoColor=white)
-
-**Observability**
-
-![Prometheus](https://img.shields.io/badge/Prometheus-2.x-E6522C?logo=prometheus&logoColor=white)
-![Grafana](https://img.shields.io/badge/Grafana-10.x-F46800?logo=grafana&logoColor=white)
-![MLflow](https://img.shields.io/badge/MLflow-2.x-0194E2?logo=mlflow)
-
-**Frontend**
-
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3-06B6D4?logo=tailwindcss&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)
-
-**DevOps & Testing**
-
-![Docker](https://img.shields.io/badge/Docker%20Compose-2496ED?logo=docker&logoColor=white)
-![Testcontainers](https://img.shields.io/badge/Testcontainers-PostgreSQL%20%2F%20Kafka-black)
-![Stripe](https://img.shields.io/badge/Stripe-API-635BFF?logo=stripe&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-Certified%20Developer-FF9900?logo=amazonaws&logoColor=white)
-
----
-
-## Featured Projects
-
-### [spring-kafka-microservice-demo](https://github.com/M-Touiti/spring-kafka-microservice-demo)
-
-Event-driven microservice built on **Hexagonal (Clean) Architecture** — demonstrating
-how to design a Kafka consumer that is resilient to failure, testable without infrastructure
-mocks, and completely decoupled from the framework at the domain layer.
-
-**Architecture — 4-module Maven (strict dependency rule)**
-
-```
-exposition ──► infrastructure ──► application ──► domain
-                                                  (pure Java · zero framework deps)
-```
-
-**Key design decisions**
-
-| Pattern | Implementation |
-|---|---|
-| Retry + DLT | `@RetryableTopic` — 3 attempts, ×2 exponential backoff, automatic Dead Letter Topic routing |
-| DDD | Aggregate roots, value objects, domain events — JPA entities never cross into the domain |
-| Hexagonal Architecture | Domain has zero Spring/JPA imports — ports are plain Java interfaces |
-| Integration testing | Testcontainers spins up real Kafka + PostgreSQL — no H2, no mocks for the DB layer |
-| API docs | OpenAPI 3 generated from controllers, browsable at `/api/docs` |
-
-`Java 21` `Spring Boot 3` `Apache Kafka` `DDD` `Hexagonal Architecture` `Clean Architecture`
-`Testcontainers` `Docker Compose` `OpenAPI` `Event-Driven` `Dead Letter Topic`
-
----
-
-### [api-gateway-resilience-demo](https://github.com/M-Touiti/api-gateway-resilience-demo)
-
-Production-grade reactive API Gateway implementing the full resilience stack —
-circuit breaker, rate limiting, retry, and JWT validation — with a pre-built
-Prometheus + Grafana observability dashboard.
-
-**Filter chain (every request passes through in order)**
-
-```
-Client
-  │
-  ▼  RequestLoggingFilter      — logs method, path, latency (global)
-  │
-  ▼  JwtAuthenticationFilter   — validates HS256 token · injects X-User-Email / X-User-Role
-  │
-  ▼  RedisRateLimiter           — token bucket per user (50 req/s) or per IP (20 req/s) · 429 on exceed
-  │
-  ▼  CircuitBreaker             — Resilience4j · CLOSED → OPEN at 30–50% failure rate · fallback 503
-  │
-  ▼  Retry                      — exponential backoff on 502/503/504 · POST /payments never retried
-  │
-  ▼  Downstream Service
-```
-
-**Key design decisions**
-
-| Pattern | Implementation |
-|---|---|
-| Circuit Breaker | Stricter for payments (30% / 30 s open) than user service (50% / 10 s open) |
-| Rate Limiting | Redis Lua script — atomic token bucket, works across multiple gateway instances |
-| JWT propagation | `Authorization` header removed before forwarding; downstream trusts `X-User-*` headers only |
-| POST idempotency | `POST /payments` is excluded from retry to prevent double-charges |
-| Observability | Prometheus scrapes `/actuator/prometheus`; Grafana shows P50/P95/P99, CB states, 429 rate |
-
-`Java 21` `Spring Cloud Gateway` `Resilience4j` `Circuit Breaker` `Rate Limiting` `Redis`
-`JWT` `Prometheus` `Grafana` `Docker Compose` `OpenAPI` `Microservices` `Resilience Patterns`
-
----
-
-## Open-Source Portfolio
-
-### Java / Spring Boot
-
-| Project | Description | Stack |
+| Measured on 1 → 3 replicas (2 CPUs, 1 GB each; stubbed 50 ms partner API) | Before | After |
 |---|---|---|
-| [spring-kafka-microservice-demo](https://github.com/M-Touiti/spring-kafka-microservice-demo) | Event-driven microservice — Kafka retry, DLT, Hexagonal Architecture, Testcontainers | Spring Boot 3, Kafka, DDD |
-| [api-gateway-resilience-demo](https://github.com/M-Touiti/api-gateway-resilience-demo) | Reactive API gateway — circuit breaker, rate limiting, JWT, Prometheus + Grafana | Spring Cloud, Resilience4j, Redis |
-| [payment-account-api](https://github.com/M-Touiti/payment-account-api) | REST API with JWT, RBAC, RFC 7807 error handling, Testcontainers | Spring Security 6, PostgreSQL |
-| [notification-service](https://github.com/M-Touiti/notification-service) | Multi-channel notifications (Email / SMS / Push) unified under one API | Twilio, Firebase FCM, Thymeleaf |
-| [batch-processing-demo](https://github.com/M-Touiti/batch-processing-demo) | CSV / Excel import pipeline with skip policy and job restart | Spring Batch 5, Apache POI |
+| REST writes | 165 → 476 req/s | 418 → 1,271 req/s, no 5xx |
+| Kafka consumption | 14.4 → 38.7 events/s | 64.9 → 175 events/s, one row per event across 72,000 events |
+| 5 parallel POSTs for each of 200 cards | 991 rows | 200 rows |
+| Rows left `FAILED` after a 40 s partner outage | 2,015, never retried | 0, retried within 5–7 minutes |
+| Malformed Kafka message | partition stopped, log flood | routed to the dead-letter topic, next message processed |
 
-### Python / FastAPI
+The figures come from one laptop, so the ratios matter more than the absolute numbers. The report states the method,
+every finding and the limits that remain.
 
-| Project | Description | Stack |
+**In progress:** the same load-test report and ADRs for `api-gateway-resilience-demo`.
+
+---
+
+## Open-source projects
+
+Every repository below has GitHub Actions CI, automated unit and integration tests, and a README on architecture and
+design decisions.
+
+| Repository | What it shows | Stack |
 |---|---|---|
-| [financial-etl-pipeline](https://github.com/M-Touiti/financial-etl-pipeline) | Real-time market data ETL with OHLCV aggregation | aiokafka, Pandas, PostgreSQL |
-| [credit-scoring-api](https://github.com/M-Touiti/credit-scoring-api) | ML credit scoring API with model versioning and audit logging | scikit-learn, MLflow, FastAPI |
-| payment-service | Payment microservice with Stripe + Redis idempotency layer | FastAPI, Stripe, Redis |
-| [fastapi-finance-api](https://github.com/M-Touiti/fastapi-finance-api) | Personal finance manager REST API — async, JWT, Alembic | FastAPI, SQLAlchemy 2.0, JWT |
-| price-monitor | E-commerce price monitor with multi-spider scraping and alerts | Scrapy, Celery, Redis |
+| [card-subscription-service ](https://github.com/M-Touiti/spring-kafka-microservice-demo) | Event-driven service with retry and dead-letter topic, circuit breaker, idempotent writes; k6 load tests and ADRs | Java 21, Spring Boot 3, Kafka, PostgreSQL, Resilience4j, Testcontainers, k6 |
+| [order-management-ddd](https://github.com/M-Touiti/order-management-ddd) | DDD tactical patterns (aggregates, value objects, domain events) and hexagonal architecture reference | Java 25, Spring Boot 4, PostgreSQL, Testcontainers |
+| [api-gateway-resilience-demo](https://github.com/M-Touiti/api-gateway-resilience-demo) | Reactive gateway: Resilience4j circuit breaker and retry, Redis token-bucket rate limiting, JWT validation, Prometheus and a provisioned Grafana dashboard | Java 21, Spring Cloud Gateway, Redis, Prometheus, Grafana, WireMock |
+| [notification-service](https://github.com/M-Touiti/notification-service) | Multi-channel notifications (email, SMS, push) driven by Kafka events, with retry and dead-letter topics | Spring Boot 3, Kafka, PostgreSQL, Testcontainers |
+| [credit-scoring-api](https://github.com/M-Touiti/credit-scoring-api) | Credit-scoring ML API with model registry, batch prediction, audit trail and drift monitoring | Python, FastAPI, scikit-learn, MLflow, PostgreSQL |
+
+Also on this profile: [payment-account-api](https://github.com/M-Touiti/payment-account-api) (Spring Security 6, JWT,
+RFC 7807 errors), [batch-processing-demo](https://github.com/M-Touiti/batch-processing-demo) (Spring Batch 5, CSV and
+Excel import with skip policy and restart), [financial-etl-pipeline](https://github.com/M-Touiti/financial-etl-pipeline)
+(Kafka to PostgreSQL market-data ETL with OHLCV aggregation) and
+[fastapi-finance-api](https://github.com/M-Touiti/fastapi-finance-api) (async FastAPI, SQLAlchemy 2.0, JWT).
 
 ---
 
-## Architecture Principles
+## How I work
 
-```
-exposition → infrastructure → application → domain
-                                            (pure Java / Python · zero framework deps)
-```
-
-Every project applies the same set of principles:
-
-- **Hexagonal / Clean Architecture** — domain layer has no Spring, JPA, or Kafka imports
-- **Event-driven** — Kafka with @RetryableTopic + Dead Letter Topic for fault tolerance
-- **Resilience patterns** — circuit breaker, rate limiting, retry with exponential backoff
-- **RFC 7807 ProblemDetail** — structured error responses on all REST APIs
-- **Testcontainers** — integration tests run against real PostgreSQL and Kafka, never H2
-- **OpenAPI 3** — auto-generated interactive docs on every service
-- **JWT + RBAC** — stateless auth, role-based access control, 30 min access / 7 day refresh tokens
-- `Decimal` not `float` for all monetary values · UUID primary keys · PostgreSQL for all persistence
+- **Decisions are written down.** ADRs record the context, the choice and what it costs, so the next engineer can
+  disagree with evidence rather than guesswork.
+- **Measure before claiming.** "Production-grade" means a load test, a failure-injection run and the raw data to back
+  it, with limits stated as plainly as results.
+- **The domain owes nothing to the framework.** Pure-Java domain modules, ports as plain interfaces, adapters at the
+  edge; the same structure I use at work in the team's service template.
+- **Design for failure.** Circuit breakers, bounded retries, dead-letter and replay topics, idempotent writes; failures
+  are recorded and retried, not dropped.
 
 ---
 
-## GitHub Stats
+## Background
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=M-Touiti&show_icons=true&theme=default&hide_border=true&count_private=true&include_all_commits=true&cache_seconds=86400" height="150"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=M-Touiti&layout=compact&theme=default&hide_border=true&langs_count=8&cache_seconds=86400" height="150"/>
-</p>
+- **BNP Paribas**, Senior Backend Engineer, Jun 2025 – present: monolith to Kubernetes microservices, Kafka at about
+  5 million events a day, team engineering standards, on-call.
+- **Société Générale** (via SAPIT), 2023 – 2025: sanctions-screening platform, Spring Boot, React, Python on AWS Lambda,
+  English-speaking remote-first team.
+- **EDF** (via SAPIT), 2022: DDD and hexagonal microservices on Spring WebFlux, Kafka, Elasticsearch, Spark and Airflow
+  pipelines.
+- **Crédit Agricole and CACEIS** (via VERMEG), 2019 – 2021: loan and trading back ends, fully remote from 2020.
+- **AWS Certified Developer – Associate** (2025). Engineering degree in computer engineering (2018). English and French,
+  fluent.
 
----
-
-## Hire Me
-
-I'm available for **part-time and full-time remote contracts** — fintech backends,
-microservices, data pipelines, and API development.
-
-| Platform | Rate | Profile |
-|---|---|---|
-| **Upwork** | 55–80 $/h | [View profile](https://www.upwork.com/freelancers/YOUR_UPWORK_ID) |
-| **Malt** | 500–550 €/day | [View profile](https://www.malt.fr/profile/YOUR_MALT_ID) |
-
-**Response time**: within 24 hours · **Timezone**: CET (Paris)
-
----
-
-<p align="center">
-  <i>Open to fintech, payments, microservices, and data engineering contracts.</i>
-</p>
+Contact: [hello@mtouiti.dev](mailto:hello@mtouiti.dev) · [linkedin.com/in/mohamed-touiti](https://www.linkedin.com/in/mohamed-touiti)
