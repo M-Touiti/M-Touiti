@@ -1,8 +1,3 @@
-<!-- Profile README for github.com/M-Touiti/M-Touiti. Rewritten 1 Nov 2026.
-     Rules: every claim is backed by a repository or by the CV; no placeholders; no rates.
-     When api-gateway-resilience-demo gets its load-test report and ADRs, replace the
-     "In progress" line below with a second "Featured" entry (same shape as the first). -->
-
 # Mohamed Touiti
 
 **Senior Backend Engineer · Java, Spring Boot, Apache Kafka, Kubernetes · event-driven microservices**
@@ -10,7 +5,7 @@
 Paris, France (CET) · Open to a fully remote Senior Backend / Tech Lead role in any time zone, and to freelance contracts
 · [LinkedIn](https://www.linkedin.com/in/mohamed-touiti) · [hello@mtouiti.dev](mailto:hello@mtouiti.dev)
 
-9+ years building event-driven, cloud-native systems for tier-one banks. At BNP Paribas I designed and delivered the
+8+ years building event-driven, cloud-native systems for tier-one banks. At BNP Paribas I designed and delivered the
 migration of a card-transaction monolith to Kubernetes microservices handling about 5 million Kafka events a day, in
 production since January 2026 with zero incidents. I own work end to end: target architecture, governance reviews,
 infrastructure, CI/CD, load testing and cut-over, and I write the team's engineering standards (service template,
@@ -20,7 +15,7 @@ Git workflow, code review). Remote or hybrid since 2020, including an English-sp
 
 ## Featured: a Kafka microservice that was load-tested, fixed and documented
 
-**[spring-kafka-microservice-demo](https://github.com/M-Touiti/spring-kafka-microservice-demo)** — card-subscription
+**[card-subscription-service](https://github.com/M-Touiti/card-subscription-service)** — card-subscription
 service: Kafka consumer plus REST API, hexagonal architecture in five Maven modules (the domain module has zero
 dependencies), Spring Boot 3, PostgreSQL, Resilience4j, Testcontainers.
 
@@ -29,10 +24,10 @@ What sets it apart from a typical demo:
 - **Load-tested with k6, before and after.** The first run found nine defects: duplicate rows under concurrency, a
   malformed message stalling a partition, a database connection held across the external call, failures never retried,
   a hanging partner API blocking health checks, and more. All nine are fixed, re-measured and written up in the
-  [load-test report](https://github.com/M-Touiti/spring-kafka-microservice-demo/blob/main/performance/README.md),
+  [load-test report](https://github.com/M-Touiti/card-subscription-service/blob/main/performance/README.md),
   with raw k6 output, charts and a one-command script to reproduce the suite.
 - **Architecture Decision Records.** Five one-page ADRs (context, decision, consequences) in
-  [docs/adr](https://github.com/M-Touiti/spring-kafka-microservice-demo/tree/main/docs/adr), each tied to the
+  [docs/adr](https://github.com/M-Touiti/card-subscription-service/tree/main/docs/adr), each tied to the
   measurements that motivated or revised it.
 - **Integration tests on real infrastructure.** Testcontainers for PostgreSQL and Kafka, WireMock for the partner
   API, run by GitHub Actions on every push and pull request.
@@ -48,7 +43,40 @@ What sets it apart from a typical demo:
 The figures come from one laptop, so the ratios matter more than the absolute numbers. The report states the method,
 every finding and the limits that remain.
 
-**In progress:** the same load-test report and ADRs for `api-gateway-resilience-demo`.
+## Featured: an API gateway that was load-tested under failure, fixed and documented
+
+**[api-gateway-resilience-demo](https://github.com/M-Touiti/api-gateway-resilience-demo)** — reactive Spring Cloud
+Gateway in front of stub services: Resilience4j circuit breaker and retry, Redis token-bucket rate limiting, per-route
+load shedding, JWT validation at the edge, Prometheus metrics and a provisioned Grafana dashboard.
+
+What sets it apart from a typical demo:
+
+- **Load-tested with k6 under load and under dependency failure.** Capacity on one and two gateways, overload with
+  and without shedding, a downstream service killed under load, Redis killed, frozen and absent at start-up, cold
+  start and 10-minute soaks. The first round found eleven findings; eight are fixed and re-measured, one was not
+  reproduced and two stay open, each with its status in the
+  [load-test report](https://github.com/M-Touiti/api-gateway-resilience-demo/blob/main/performance/README.md),
+  with raw k6 output, charts and a reproduce script.
+- **Architecture Decision Records.** Six one-page ADRs (context, decision, consequences) in
+  [docs/adr](https://github.com/M-Touiti/api-gateway-resilience-demo/tree/main/docs/adr), with consequences marked
+  *measured* linked to the report, and the open follow-ups (retry on the auth route, the untuned shedding limit)
+  recorded rather than hidden.
+- **Integration tests against stubbed downstream services.** WireMock stands in for the user and payment services;
+  unit tests cover the rate limiter, the concurrency limit and JWT handling; all run by GitHub Actions on every push
+  and pull request.
+
+| Measured on one gateway limited to 2 CPUs (stub downstream services) | Before | After |
+|---|---|---|
+| Throughput with no failed requests | — | about 2,000 req/s on one gateway, 4,000 on two |
+| Added latency at 500 req/s (JWT validation and a Redis call) | — | about 0.4 ms p50, 1.1 ms p95 |
+| Redis killed, 256 MB heap | stopped responding after 45 s, still down 2 min after Redis returned | 0% failed, p50 1.4 ms |
+| Started without Redis | 99.97% of requests timed out | all 11,934 requests served |
+| Rate limit with a spoofed `X-Forwarded-For` | bypassed | header ignored unless a trusted proxy is configured; 3,103 admitted against 3,100 theoretical |
+| Heavy overload (3,000 to 5,000 req/s) | latency rose to about 1 s p50, nothing shed | 503 above 512 in flight per route; successes about 3 times faster at p50, 4% to 21% fewer |
+| Downstream service killed | — | breaker open in about 5 s, fallback at 1.3 ms, other route unaffected, recovery 11 s after restart |
+
+The figures come from one laptop, so they compare configurations rather than state production capacity. The report
+states the method, every finding and the limits that remain.
 
 ---
 
@@ -59,9 +87,9 @@ design decisions.
 
 | Repository | What it shows | Stack |
 |---|---|---|
-| [card-subscription-service ](https://github.com/M-Touiti/spring-kafka-microservice-demo) | Event-driven service with retry and dead-letter topic, circuit breaker, idempotent writes; k6 load tests and ADRs | Java 21, Spring Boot 3, Kafka, PostgreSQL, Resilience4j, Testcontainers, k6 |
+| [card-subscription-service](https://github.com/M-Touiti/card-subscription-service) | Event-driven service with retry and dead-letter topic, circuit breaker, idempotent writes; k6 load tests and 5 ADRs | Java 21, Spring Boot 3, Kafka, PostgreSQL, Resilience4j, Testcontainers, k6 |
 | [order-management-ddd](https://github.com/M-Touiti/order-management-ddd) | DDD tactical patterns (aggregates, value objects, domain events) and hexagonal architecture reference | Java 25, Spring Boot 4, PostgreSQL, Testcontainers |
-| [api-gateway-resilience-demo](https://github.com/M-Touiti/api-gateway-resilience-demo) | Reactive gateway: Resilience4j circuit breaker and retry, Redis token-bucket rate limiting, JWT validation, Prometheus and a provisioned Grafana dashboard | Java 21, Spring Cloud Gateway, Redis, Prometheus, Grafana, WireMock |
+| [api-gateway-resilience-demo](https://github.com/M-Touiti/api-gateway-resilience-demo) | Reactive gateway: Resilience4j circuit breaker and retry, Redis token-bucket rate limiting, load shedding, JWT validation, Prometheus and a provisioned Grafana dashboard; k6 load tests under dependency failure and 6 ADRs | Java 21, Spring Cloud Gateway, Redis, Prometheus, Grafana, WireMock, k6 |
 | [notification-service](https://github.com/M-Touiti/notification-service) | Multi-channel notifications (email, SMS, push) driven by Kafka events, with retry and dead-letter topics | Spring Boot 3, Kafka, PostgreSQL, Testcontainers |
 | [credit-scoring-api](https://github.com/M-Touiti/credit-scoring-api) | Credit-scoring ML API with model registry, batch prediction, audit trail and drift monitoring | Python, FastAPI, scikit-learn, MLflow, PostgreSQL |
 
